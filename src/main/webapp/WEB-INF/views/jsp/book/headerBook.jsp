@@ -15,9 +15,9 @@
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" >Spring Web MVC demo ||||</a>
+      <a class="navbar-brand" href="/">Spring Web MVC demo ||||</a>
       <div class="container-md">
-           <a class="navbar-brand" aria-current="page" href="#"> Add book</a>
+           <a class="navbar-brand" aria-current="page" href="/newBook"> Add book</a>
         </div>
     </div>
   </nav>

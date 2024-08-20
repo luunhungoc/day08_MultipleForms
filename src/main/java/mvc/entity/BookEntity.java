@@ -15,7 +15,7 @@ public class BookEntity {
     @Column(name="author")
     private String author;
 
-    @NotEmpty (message="Not empty")
+    @NotEmpty (message="Please enter book name.")
     @Column(name="name")
     private String name;
 

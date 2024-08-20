@@ -8,10 +8,13 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Book management demo | Home</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<title>Book management demo | Update </title>
+<link rel="stylesheet" type="text/css" href='${pageContext.request.getContextPath()}/webjars/bootstrap/5.3.0/css/bootstrap.min.css' />
+<script type="text/javascript" src="${pageContext.request.getContextPath()}/webjars/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
 <%@ include file="headerBook.jsp" %>
+</head>
+
 <body>
 
 
@@ -47,8 +50,8 @@
       <td>${book.bookDetails.publishDate}</td>
       <td>${book.category.name}</td>
       <td>
-      <button type="button" class="btn btn-primary">Edit</button>
-      <button type="button" class="btn btn-danger">Delete</button>
+      <button class="btn btn-primary" onclick="location.href='/edit/${book.id}'">Edit</button>
+      <button class="btn btn-danger" onclick="location.href='/delete/${book.id}'">Delete</button>
       </td>
     </tr>
     </c:forEach>

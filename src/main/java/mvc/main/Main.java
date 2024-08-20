@@ -12,6 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
     static ApplicationContext context= new AnnotationConfigApplicationContext(Config.class);
@@ -25,13 +26,15 @@ public class Main {
 
 //        createNewBookEntryWithNewCategory();
 //        createNewBookEntry();
-        findAll();
+//        findAll();
+findBookById(4);
 //        findByAuthor("Roger");
 //        findByNameAndAuthor("Java A-Z","Roger");
 //        findByNameOrAuthor("linux","Roger");
 //        findByPriceLessThan(80);
 //        findByBookDetailsIsbn("ISIBF1219323");
 //        findByNameContaining("ava");
+//        findByNameContainingOrAuthorContaining("ava","hom");
 //        deleteBookById(1);
 //        deleteAllBook();
 
@@ -57,6 +60,17 @@ public class Main {
         bookRepository.deleteAll();
         System.out.println("Deleted all books");
     }
+
+    public static void findBookById(int id){
+        BookEntity bookEntity= bookRepository.findById(id).get();
+        if(bookEntity!=null){
+            System.out.println("\nFind book which id= "+id);
+
+            System.out.println(bookEntity.toString());
+
+        }
+    }
+
 
     public static void findAll(){
         List<BookEntity> bookEntityList= (List<BookEntity>) bookRepository.findAll();
@@ -119,6 +133,16 @@ public class Main {
         }
     }
 
+    public static void findByNameContainingOrAuthorContaining(String name, String author){
+        List<BookEntity> bookEntityList=bookRepository.findByNameContainingOrAuthorContaining(name, author);
+        if(bookEntityList!=null){
+            System.out.println("\nFind "+bookEntityList.size()+" books containing name "+name+" or author "+author);
+            for(BookEntity bookEntity:bookEntityList){
+                System.out.println(bookEntity.toString());
+            }
+        }
+    }
+
 
     public static void findByBookDetailsIsbn(String isbn){
         BookEntity bookEntity= bookRepository.findByBookDetailsIsbn(isbn);
@@ -134,7 +158,7 @@ public class Main {
 //
     public static void createNewBookEntry(){
         CategoryEntity categoryEntity= new CategoryEntity();
-        categoryEntity.setId(1);
+        categoryEntity.setId(2);
 
         BookEntity bookEntity=createNewBook();
         bookEntity.setCategory(categoryEntity);
@@ -151,21 +175,23 @@ public class Main {
 
     private static CategoryEntity createNewCategory() {
         CategoryEntity categoryEntity=new CategoryEntity();
-        categoryEntity.setName("Math");
-        categoryEntity.setDescription("Math books");
+
+        categoryEntity.setName("IT");
+        categoryEntity.setDescription("IT books");
+        categoryRepository.save(categoryEntity);
         return categoryEntity;
     }
 
     private static BookEntity createNewBook() {
         BookDetailsEntity bookDetailsEntity = new BookDetailsEntity();
-        bookDetailsEntity.setIsbn("ISIBF12200003");
-        bookDetailsEntity.setNumberOfPage(363);
-        bookDetailsEntity.setPrice(300);
-        bookDetailsEntity.setPublishDate(LocalDate.parse("2015-01-08"));
+        bookDetailsEntity.setIsbn("ISIBF00090003");
+        bookDetailsEntity.setNumberOfPage(1000);
+        bookDetailsEntity.setPrice(100);
+        bookDetailsEntity.setPublishDate(LocalDate.parse("2014-09-08"));
 
         BookEntity bookEntity = new BookEntity();
-        bookEntity.setName("Linux shell programming");
-        bookEntity.setAuthor("Thomas");
+        bookEntity.setAuthor("Bruno");
+        bookEntity.setName("Math basic level 1");
         bookEntity.setBookDetails(bookDetailsEntity);
         bookDetailsEntity.setBook(bookEntity);
 

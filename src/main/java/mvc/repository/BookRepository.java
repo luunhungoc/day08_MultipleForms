@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends CrudRepository<BookEntity,Integer> {
     List<BookEntity> findByAuthor(String author);
+
     List<BookEntity> findByNameAndAuthor(String name,String author);
     List<BookEntity> findByNameOrAuthor(String name, String author);
     BookEntity findByBookDetailsIsbn(String isbn);
@@ -19,6 +20,6 @@ public interface BookRepository extends CrudRepository<BookEntity,Integer> {
     @Query(value="select * from book join bookDetails where bookDetails.price <?1 and book.id = bookDetails.id",nativeQuery=true)
     List<BookEntity> findByPriceLessThan(int price);
     List<BookEntity> findByNameContaining(String name);
-
+    List<BookEntity> findByNameContainingOrAuthorContaining(String name, String author);
 
 }
